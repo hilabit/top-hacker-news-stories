@@ -1,10 +1,38 @@
 import React from "react";
 import "./App.css";
 import axios from "axios";
+import styled from "styled-components";
+
+const Header = styled.div`
+    max-width:756px;
+    background-color:blue;
+    padding-left: 12px;
+    padding-right: 12px;
+    display: block;
+    padding-top: 12px;
+
+`;
+
+const SiteName = styled.div`
+    background-color: #f7df1e;
+    padding: 4px 8px;
+    float: left;
+`
+
+
+
+const Container = styled.div`
+    background-color: blue;
+    padding: 50px;
+`;
+
+const StoryList = styled.li`
+    background-color: #f8f7f5;
+`;
 
 class App extends React.Component {
     state = {
-        topStories:[]
+        topStories: []
     };
 
     componentDidMount() {
@@ -29,11 +57,6 @@ class App extends React.Component {
                                 }
                             ]
                         });
-                        // console.log(this.state.topStories);
-                        // const {topStories} = this.state
-
-                        // const story = topStories.map(story => story)
-                        // console.log("story", story);
                     });
 
                     return this.state;
@@ -43,26 +66,25 @@ class App extends React.Component {
     }
 
     render() {
-        // const id = this.state.topStories.id
-        const {topStories} = this.state;
-
-
-        //   console.log("object.keys", Object.keys(this.state.topStories[keys]));
-        //   const topStories = Object.keys(this.state.topStories).map((keys) => {
-        //       console.log(this.state.topStories[keys])
-        //
-        // })
-        // console.log(topStories);
-
-        return <div>
-        {topStories.map((story) => (
-            <li key={story.id}>
-             by: {story.by} 
-         title: {story.title}
-            website: {story.url}
-            </li>
-        ))}
-        </div>
+        const { topStories } = this.state;
+        return (
+            <div>
+            <Header>
+                <SiteName>Hacker News</SiteName>
+                </Header>
+                <Container>
+                    <StoryList>
+                        {topStories.map(story => (
+                            <li key={story.id}>
+                                by: {story.by}
+                                title: {story.title}
+                                website: {story.url}
+                            </li>
+                        ))}
+                    </StoryList>
+                </Container>
+            </div>
+        );
     }
 }
 
