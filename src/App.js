@@ -3,32 +3,74 @@ import "./App.css";
 import axios from "axios";
 import styled from "styled-components";
 
+
+
 const Header = styled.div`
     max-width:756px;
-    background-color:blue;
     padding-left: 12px;
     padding-right: 12px;
-    display: block;
     padding-top: 12px;
-
+    line-height: 1.0em;
+    font-weight: 500;
+    margin: 15px 0px;
+    position: relative;
+    left: 162px;
 `;
 
 const SiteName = styled.div`
     background-color: #f7df1e;
     padding: 4px 8px;
     float: left;
+`;
+
+const Body = styled.div`
+    display: flex;
+    padding: 50px;
+    max-width:756px;
+    font-family: '-apple-system,BlinkMacSystemFont,Helvetica,sans-serif';
+`;
+
+const Container = styled.div`
+    max-width:756px;
+`
+
+
+const StoryList = styled.div`
+    background-color: #f8f7f5;
+    max-width:756px;
+    padding: opx 15px;
+    display: flex;
+    flex-direction: column;
+
+`;
+
+const Story = styled.section`
+    margin-top: 28px;
+    margin-bottom: 28px;
+    max-width:570px;
+    padding: opx 15px;
+
+`
+const Atag = styled.a`
+    text-decoration:none;
+    color: #3366AA;
+    border-bottom-width: 1px;
+    font-size: 20px;
+    line-height: 1.4em;
+    font-family:'-apple-system,BlinkMacSystemFont,Helvetica,sans-serif'
+`
+const Author = styled.p`
+    font-size: 14px;
+    color: #5A5A5A;
+    margin-top: 4px;
+    margin-bottom: 0.8em;
+    text-transform: uppercase;
+    line-height: 1.2em;
+
 `
 
 
 
-const Container = styled.div`
-    background-color: blue;
-    padding: 50px;
-`;
-
-const StoryList = styled.li`
-    background-color: #f8f7f5;
-`;
 
 class App extends React.Component {
     state = {
@@ -69,20 +111,21 @@ class App extends React.Component {
         const { topStories } = this.state;
         return (
             <div>
-            <Header>
-                <SiteName>Hacker News</SiteName>
+                <Header>
+                    <SiteName>Hacker News</SiteName>
                 </Header>
-                <Container>
-                    <StoryList>
-                        {topStories.map(story => (
-                            <li key={story.id}>
-                                by: {story.by}
-                                title: {story.title}
-                                website: {story.url}
-                            </li>
-                        ))}
-                    </StoryList>
-                </Container>
+                <Body>
+                    <Container>
+                        <StoryList>
+                            {topStories.map(story => (
+                                <Story key={story.id}>
+                                <Atag href = {story.url}>{story.title}</Atag>
+                                <Author>{story.by}</Author>
+                                </Story>
+                            ))}
+                        </StoryList>
+                    </Container>
+                </Body>
             </div>
         );
     }
