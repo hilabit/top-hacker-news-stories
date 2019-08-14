@@ -15,6 +15,7 @@ const Header = styled.div`
     margin: 15px 0px;
     position: relative;
     left: 162px;
+
 `;
 
 const SiteName = styled.div`
@@ -50,6 +51,7 @@ const Story = styled.section`
     max-width:570px;
     padding: opx 15px;
 
+
 `
 const Atag = styled.a`
     text-decoration:none;
@@ -57,7 +59,6 @@ const Atag = styled.a`
     border-bottom-width: 1px;
     font-size: 20px;
     line-height: 1.4em;
-    font-family:'-apple-system,BlinkMacSystemFont,Helvetica,sans-serif'
 `
 const Author = styled.p`
     font-size: 14px;
