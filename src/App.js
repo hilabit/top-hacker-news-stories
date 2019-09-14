@@ -28,6 +28,8 @@ const SiteName = styled.div`
 `;
 const Body = styled.div`
     font-family: "-apple-system,BlinkMacSystemFont,Helvetica,sans-serif";
+    display:flex;
+    flex-direction: column;
 `;
 
 const StoryList = styled.div`
@@ -41,7 +43,9 @@ const Story = styled.section`
     padding: 0px 15px;
     justify-self: center;
 `;
-const Atag = styled.a`
+const Atag = styled.a.attrs({
+
+})`
     text-decoration: none;
     color: #3366aa;
     border-bottom-width: 1px;
@@ -49,6 +53,10 @@ const Atag = styled.a`
     line-height: 1.4em;
     border-bottom-style: solid;
     border-bottom-color: #ddd;
+
+    &.next {
+        align-self: center;
+    }
 `;
 const Author = styled.p`
     font-size: 14px;
@@ -58,11 +66,19 @@ const Author = styled.p`
     text-transform: uppercase;
     line-height: 1.2em;
 `;
+const Footer = styled.div`
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+`
 
 class App extends React.Component {
     state = {
         topStories: []
     };
+
+
 
     componentDidMount() {
         axios
@@ -70,32 +86,36 @@ class App extends React.Component {
             .then(({ data }) => {
                 const topStoriesIds = data.slice(0, 10);
 
-                topStoriesIds.map(storyId => {
-                    const storyEndpoint = `https://hacker-news.firebaseio.com/v0/item/${storyId}.json`;
-                    axios.get(storyEndpoint).then(response => {
-                        const { id, title, by, url } = response.data;
-                        const { topStories } = this.state;
-                        this.setState({
-                            topStories: [
-                                ...topStories,
-                                {
-                                    id: id,
-                                    title: title,
-                                    by: by,
-                                    url: url
-                                }
-                            ]
-                        });
-                    });
 
-                    return this.state;
-                });
+
+                //
+                // topStoriesIds.map(storyId => {
+                //     const storyEndpoint = `https://hacker-news.firebaseio.com/v0/item/${storyId}.json`;
+                //     axios.get(storyEndpoint).then(response => {
+                //         const { id, title, by, url } = response.data;
+                //         const { topStories } = this.state;
+                //         this.setState({
+                //             topStories: [
+                //                 ...topStories,
+                //                 {
+                //                     id: id,
+                //                     title: title,
+                //                     by: by,
+                //                     url: url
+                //                 }
+                //             ]
+                //         });
+                //     });
+            //
+            //         return this.state;
+            //     });
             })
             .catch(error => console.log(error));
     }
 
     render() {
-        const { topStories } = this.state;
+        // console.log(this.state)
+        // const { topStories } = this.state;
         return (
             <Page>
                 <Container>
@@ -111,6 +131,10 @@ class App extends React.Component {
                                 </Story>
                             ))}
                         </StoryList>
+                        <Footer>
+                        <Atag href='#' onClick="console.log('prev')" className='prev'>prev</Atag>
+                        <Atag className='next'>next</Atag>
+                        </Footer>
                     </Body>
                 </Container>
             </Page>
